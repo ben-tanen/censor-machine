@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Censor Machine</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+        var keyup = true;
+        var beep = new Audio("beep.mp3");
+
+        $(document).keydown(function() {
+            if (keyup) {
+                keyup = false;
+                beep.play();
+                $('h1').css('display', 'block');
+            }
+        });
+
+        beep.addEventListener('ended', function(){
+            if (!keyup) beep.play();
+        });
+
+        $(document).keyup(function() {
+            keyup = true;
+            beep.pause();
+            beep.currentTime = 0;
+            $('h1').css('display', 'none');
+        })
+    </script>
+    <style>
+        body { margin: 0; padding: 0; background-color: black; color: red; font-family: sans-serif; }
+        h1 { display: inherit; text-align: center; font-size: 150px;}
+    </style>
+</head>
+<body>
+    <h1>BEEP</h1>
+</body>
+</html>
